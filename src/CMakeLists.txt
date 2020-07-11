@@ -217,10 +217,12 @@ if(INSTALL_LIBRARY)
 
 endif(INSTALL_LIBRARY)
 
-if (DEBUG)
-	add_custom_command(TARGET SDL_gpu_shared POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}/${OUTPUT_DIR}/bin/Debug/${SHARED_OUTPUT}.dll" "${ROOT_SOURCE_DIR}/bin/${ROOT_PROJ_NAME}/Debug/${SHARED_OUTPUT}.dll")
-else(DEBUG)
-	add_custom_command(TARGET SDL_gpu_shared POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}/${OUTPUT_DIR}/bin/Release/${SHARED_OUTPUT}.dll" "${ROOT_SOURCE_DIR}/bin/${ROOT_PROJ_NAME}/Release/${SHARED_OUTPUT}.dll")
-endif(DEBUG)
+if (WIN32)
+	if (DEBUG)
+		add_custom_command(TARGET SDL_gpu_shared POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}/${OUTPUT_DIR}/bin/Debug/${SHARED_OUTPUT}.dll" "${ROOT_SOURCE_DIR}/bin/${ROOT_PROJ_NAME}/Debug/${SHARED_OUTPUT}.dll")
+	else (DEBUG)
+		add_custom_command(TARGET SDL_gpu_shared POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_BINARY_DIR}/${OUTPUT_DIR}/bin/Release/${SHARED_OUTPUT}.dll" "${ROOT_SOURCE_DIR}/bin/${ROOT_PROJ_NAME}/Release/${SHARED_OUTPUT}.dll")
+	endif (DEBUG)
+endif (WIN32)
